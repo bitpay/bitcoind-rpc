@@ -88,7 +88,7 @@ function ClassSpec(b) {
     validateAddress: '',
     verifyMessage: '',
     walletLock: '',
-    walletPassphrase: 'string int',
+    walletPassPhrase: 'string int',
     walletPassphraseChange: '',
   };
 
