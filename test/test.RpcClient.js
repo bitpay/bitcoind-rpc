@@ -1,17 +1,13 @@
 'use strict';
 
 var chai = require('chai');
-var bitcore = require('../bitcore');
+var RpcClient = require('../');
 
 var should = chai.should();
 
-var RpcClientModule = bitcore.RpcClient;
-var RpcClient;
-    RpcClient = RpcClientModule;
-
 describe('RpcClient', function() {
   it('should initialze the main object', function() {
-    should.exist(RpcClientModule);
+    should.exist(RpcClient);
   });
   it('should be able to create class', function() {
     should.exist(RpcClient);
@@ -21,8 +17,3 @@ describe('RpcClient', function() {
     should.exist(s);
   });
 });
-
-
-
-
-
