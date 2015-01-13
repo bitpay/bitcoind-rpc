@@ -9,7 +9,6 @@ var should = chai.should();
 var http = require('http');
 var https = require('https');
 var async = require('async');
-var log = require('../lib/log');
 
 describe('RpcClient', function() {
 
@@ -20,6 +19,31 @@ describe('RpcClient', function() {
   it('should be able to create instance', function() {
     var s = new RpcClient();
     should.exist(s);
+  });
+
+  it('should be able to define a custom logger', function() {
+    var customLogger = {
+      info: function(){},
+      warn: function(){},
+      err: function(){},
+      debug: function(){}
+    };
+    RpcClient.config.log = customLogger;
+    var s = new RpcClient();
+    s.log.should.equal(customLogger);
+    RpcClient.config.log = false;
+  });
+
+  it('should be able to define the logger to normal', function() {
+    RpcClient.config.logger = 'normal';
+    var s = new RpcClient();
+    s.log.should.equal(RpcClient.loggers.normal);
+  });
+
+  it('should be able to define the logger to none', function() {
+    RpcClient.config.logger = 'none';
+    var s = new RpcClient();
+    s.log.should.equal(RpcClient.loggers.none);
   });
 
   function FakeResponse(){
