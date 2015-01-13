@@ -3,14 +3,15 @@ bitcoind-rpc.js
 
 A client library to connect to Bitcoin Core RPC in JavaScript.
 
-#Get Started
+## Get Started
 
 bitcoind-rpc.js runs on [node](http://nodejs.org/), and can be installed via [npm](https://npmjs.org/):
-```
+
+```bash
 npm install bitcoind-rpc
 ```
 
-#Examples
+## Examples
 
 Some examples are provided at the [examples](/examples) path. Here are some snippets:
 
@@ -44,7 +45,7 @@ var run = function() {
 
 ```
 
-#License
+## License
 
 **Code released under [the MIT license](https://github.com/bitpay/bitcore/blob/master/LICENSE).**
 
