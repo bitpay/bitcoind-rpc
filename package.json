@@ -42,7 +42,8 @@
     "async": "^0.9.0",
     "chai": "^1.10.0",
     "istanbul": "^0.3.5",
-    "mocha": "^2.1.0"
+    "mocha": "^2.1.0",
+    "sinon": "^1.12.2"
   },
   "bugs": {
     "url": "https://github.com/bitpay/bitcoind-rpc/issues"
