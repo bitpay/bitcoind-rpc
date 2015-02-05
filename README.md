@@ -1,6 +1,10 @@
 bitcoind-rpc.js
 ===============
 
+[![NPM Package](https://img.shields.io/npm/v/bitcoind-rpc.svg?style=flat-square)](https://www.npmjs.org/package/bitcoind-rpc)
+[![Build Status](https://img.shields.io/travis/bitpay/bitcoind-rpc.svg?branch=master&style=flat-square)](https://travis-ci.org/bitpay/bitcoind-rpc)
+[![Coverage Status](https://img.shields.io/coveralls/bitpay/bitcoind-rpc.svg?style=flat-square)](https://coveralls.io/r/bitpay/bitcoind-rpc?branch=master)
+
 A client library to connect to Bitcoin Core RPC in JavaScript.
 
 ## Get Started
@@ -12,8 +16,6 @@ npm install bitcoind-rpc
 ```
 
 ## Examples
-
-Some examples are provided at the [examples](/examples) path. Here are some snippets:
 
 ```javascript
 
@@ -40,7 +42,6 @@ var run = function() {
     console.log(ret);
   });
 };
-
 ```
 
 ## License
