@@ -21,6 +21,12 @@ describe('RpcClient', function() {
     should.exist(s);
   });
 
+  it('default to rejectUnauthorized as true', function() {
+    var s = new RpcClient();
+    should.exist(s);
+    s.rejectUnauthorized.should.equal(true);
+  });
+
   it('should be able to define a custom logger', function() {
     var customLogger = {
       info: function(){},
