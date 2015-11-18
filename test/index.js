@@ -92,6 +92,15 @@ describe('RpcClient', function() {
 
   });
 
+  it('should accept URL', function() {
+    var client = new RpcClient('http://abc:def@ghi.xyz:1337');
+    client.protocol.should.equal(http);
+    client.host.should.equal('ghi.xyz');
+    client.port.should.equal(1337);
+    client.user.should.equal('abc');
+    client.pass.should.equal('def');
+  });
+
   it('should call a method and receive response', function(done) {
 
     var client = new RpcClient({
