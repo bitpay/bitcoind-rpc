@@ -161,6 +161,43 @@ describe('RpcClient', function() {
 
   });
 
+  it('should process object arguments', function(done) {
+
+    var client = new RpcClient({
+      user: 'user',
+      pass: 'pass',
+      host: 'localhost',
+      port: 8332,
+      rejectUnauthorized: true,
+      disableAgent: false
+    });
+
+    var requestStub = sinon.stub(client.protocol, 'request', function(options, callback){
+      var res = new FakeResponse();
+      var req = new FakeRequest();
+      setImmediate(function(){
+        res.emit('data', req.data);
+        res.emit('end');
+      });
+      callback(res);
+      return req;
+    });
+
+    var obj = {'n28S35tqEMbt6vNad7A5K3mZ7vdn8dZ86X': 1};
+    async.eachSeries([obj, JSON.stringify(obj)], function(i, next) {
+      client.sendMany('account', i, function(error, parsedBuf) {
+        should.not.exist(error);
+        should.exist(parsedBuf);
+        parsedBuf.params[1].should.have.property('n28S35tqEMbt6vNad7A5K3mZ7vdn8dZ86X', 1);
+        next();
+      });
+    }, function(err) {
+      requestStub.restore();
+      done();
+    });
+
+  });
+
   it('should batch calls for a method and receive a response', function(done) {
 
     var client = new RpcClient({
