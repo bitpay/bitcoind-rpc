@@ -10,6 +10,8 @@ var http = require('http');
 var https = require('https');
 var async = require('async');
 
+if(!setImmediate) setImmediate = setTimeout;
+
 describe('RpcClient', function() {
 
   it('should initialize the main object', function() {
@@ -106,10 +108,10 @@ describe('RpcClient', function() {
     var requestStub = sinon.stub(client.protocol, 'request', function(options, callback){
       var res = new FakeResponse();
       var req =  new FakeRequest();
-      setTimeout(function(){
+      setImmediate(function(){
         res.emit('data', '{}');
         res.emit('end');
-      }, 10);
+      });
       callback(res);
       return req;
     });
@@ -137,10 +139,10 @@ describe('RpcClient', function() {
     var requestStub = sinon.stub(client.protocol, 'request', function(options, callback){
       var res = new FakeResponse();
       var req = new FakeRequest();
-      setTimeout(function(){
+      setImmediate(function(){
         res.emit('data', req.data);
         res.emit('end');
-      }, 10);
+      });
       callback(res);
       return req;
     });
@@ -172,10 +174,10 @@ describe('RpcClient', function() {
 
     var requestStub = sinon.stub(client.protocol, 'request', function(options, callback){
       var res = new FakeResponse();
-      setTimeout(function(){
+      setImmediate(function(){
         res.emit('data', '[{}, {}, {}]');
         res.emit('end');
-      }, 10);
+      });
       callback(res);
       return new FakeRequest();
     });
@@ -212,9 +214,9 @@ describe('RpcClient', function() {
     var requestStub = sinon.stub(client.protocol, 'request', function(options, callback){
       var res = new FakeResponse();
       res.statusCode = 401;
-      setTimeout(function(){
+      setImmediate(function(){
         res.emit('end');
-      }, 10);
+      });
       callback(res);
       return new FakeRequest();
     });
@@ -242,9 +244,9 @@ describe('RpcClient', function() {
     var requestStub = sinon.stub(client.protocol, 'request', function(options, callback){
       var res = new FakeResponse();
       res.statusCode = 403;
-      setTimeout(function(){
+      setImmediate(function(){
         res.emit('end');
-      }, 10);
+      });
       callback(res);
       return new FakeRequest();
     });
@@ -270,15 +272,15 @@ describe('RpcClient', function() {
     });
 
     var requestStub = sinon.stub(client.protocol, 'request', function(options, callback){
+      var req = new FakeRequest();
+      setImmediate(function(){
+        req.emit('error', new Error('write EPIPE'));
+      });
       var res = new FakeResponse();
-      setTimeout(function(){
+      setImmediate(function(){
         res.emit('data', '{}');
         res.emit('end');
-      }, 10);
-      var req = new FakeRequest();
-      setTimeout(function(){
-        req.emit('error', new Error('write EPIPE'));
-      }, 8);
+      });
       callback(res);
       return req;
     });
@@ -305,14 +307,14 @@ describe('RpcClient', function() {
 
     var requestStub = sinon.stub(client.protocol, 'request', function(options, callback){
       var res = new FakeResponse();
-      setTimeout(function(){
+      setImmediate(function(){
         res.emit('data', '{}');
         res.emit('end');
-      }, 8);
+      });
       var req = new FakeRequest();
-      setTimeout(function(){
+      setImmediate(function(){
         req.emit('error', new Error('write EPIPE'));
-      }, 10);
+      });
       callback(res);
       req.on('error', function(err) {
         requestStub.restore();
@@ -339,9 +341,9 @@ describe('RpcClient', function() {
     var requestStub = sinon.stub(client.protocol, 'request', function(options, callback){
       var res = new FakeResponse();
       var req = new FakeRequest();
-      setTimeout(function(){
+      setImmediate(function(){
         req.emit('error', new Error('connect ECONNREFUSED'));
-      }, 10);
+      });
       callback(res);
       return req;
     });
@@ -368,10 +370,10 @@ describe('RpcClient', function() {
 
     var requestStub = sinon.stub(client.protocol, 'request', function(options, callback){
       var res = new FakeResponse();
-      setTimeout(function(){
+      setImmediate(function(){
         res.emit('data', 'not a json string');
         res.emit('end');
-      }, 8);
+      });
       var req = new FakeRequest();
       callback(res);
       return req;
@@ -399,10 +401,10 @@ describe('RpcClient', function() {
 
     var requestStub = sinon.stub(client.protocol, 'request', function(options, callback){
       var res = new FakeResponse();
-      setTimeout(function(){
+      setImmediate(function(){
         res.emit('data', '');
         res.emit('end');
-      }, 8);
+      });
       var req = new FakeRequest();
       callback(res);
       return req;
@@ -437,10 +439,10 @@ describe('RpcClient', function() {
     var requestStub = sinon.stub(client.protocol, 'request', function(options, callback){
       calledPort = options.port;
       var res = new FakeResponse();
-      setTimeout(function(){
+      setImmediate(function(){
         res.emit('data', '{}');
         res.emit('end');
-      }, 8);
+      });
       var req = new FakeRequest();
       callback(res);
       return req;
