@@ -297,6 +297,37 @@ describe('RpcClient', function() {
 
   });
 
+  it('should handle 500 work limit exceeded error', function(done) {
+
+    var client = new RpcClient({
+      user: 'user',
+      pass: 'pass',
+      host: 'localhost',
+      port: 8332,
+      rejectUnauthorized: true,
+      disableAgent: true
+    });
+
+    var requestStub = sinon.stub(client.protocol, 'request', function(options, callback){
+      var res = new FakeResponse();
+      res.statusCode = 500;
+      setImmediate(function(){
+        res.emit('data', 'Work queue depth exceeded');
+        res.emit('end');
+      });
+      callback(res);
+      return new FakeRequest();
+    });
+
+    client.getDifficulty(function(error, parsedBuf) {
+      requestStub.restore();
+      should.exist(error);
+      error.message.should.equal('Bitcoin JSON-RPC: Work queue depth exceeded');
+      done();
+    });
+
+  });
+
   it('should handle EPIPE error case 1', function(done) {
 
     var client = new RpcClient({
