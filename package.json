@@ -1,7 +1,7 @@
 {
   "name": "bitcoind-rpc",
   "description": "Bitcoin Client Library to connect to Bitcoin Core via RPC",
-  "version": "0.7.2",
+  "version": "0.8",
   "author": {
     "name": "Stephen Pair",
     "email": "stephen@bitpay.com"
@@ -18,10 +18,6 @@
     {
       "name": "Matias Alejo Garcia",
       "email": "ematiu@gmail.com"
-    },
-    {
-      "name": "Braydon Fuller",
-      "email": "braydon@bitpay.com"
     }
   ],
   "keywords": [
