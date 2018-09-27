@@ -30,6 +30,9 @@ var run = function() {
     port: '18332',
   };
 
+  // config can also be an url, e.g.:
+  // var config = 'http://user:pass@127.0.0.1:18332';
+
   var rpc = new RpcClient(config);
 
   var txids = [];
