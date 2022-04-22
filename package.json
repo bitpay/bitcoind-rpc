@@ -1,5 +1,5 @@
 {
-  "name": "bitcoind-rpc",
+  "name": "@ledgerhq/bitcoind-rpc",
   "description": "Bitcoin Client Library to connect to Bitcoin Core via RPC",
   "version": "0.9.0",
   "author": {
@@ -30,7 +30,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/bitpay/bitcoind-rpc"
+    "url": "https://github.com/LedgerHQ/bitcoind-rpc"
   },
   "license": "MIT",
   "main": "lib/index.js",
@@ -47,7 +47,7 @@
     "sinon": "^1.12.2"
   },
   "bugs": {
-    "url": "https://github.com/bitpay/bitcoind-rpc/issues"
+    "url": "https://github.com/LedgerHQ/bitcoind-rpc/issues"
   },
-  "homepage": "https://github.com/bitpay/bitcoind-rpc"
+  "homepage": "https://github.com/LedgerHQ/bitcoind-rpc"
 }
